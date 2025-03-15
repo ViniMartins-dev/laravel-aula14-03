@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\motos;
+use App\Models\Motos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facade\Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 
 
 class MotosController extends Controller
@@ -14,7 +15,11 @@ class MotosController extends Controller
      */
     public function index()
     {
-        //
+        $registrosMoto = Motos::All();
+
+        $contador = $registrosMoto->count();
+
+        return('Motos cadastradas: '.$contador.$registrosMoto.Response()->json([], Response::HTTP_NO_CONTENT));
     }
 
     /**
@@ -37,10 +42,12 @@ class MotosController extends Controller
 
         }
 
-        $
+        $enviaDados = Motos::create($registrosMoto);
 
-        if(){
-
+        if($enviaDados){
+            return 'Registros cadastrados: '.Response()->json([], Response::HTTP_NO_CONTENT);
+        } else {
+            return 'Registros não cadastrados: '.Response()->json([], Response::HTTP_NO_CONTENT);
         }
     }
 
